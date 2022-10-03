@@ -38,9 +38,9 @@ class BaseModel(models.Model):
     
 
 class MyUserManager(UserManager):
-    def create_user(self, username: str, email: str, password: Optional[str] = ..., **extra_fields: Any) -> _T:
+    def create_user(self, username: str, email: str, password:str = ..., **extra_fields):
         return super().create_user(username, email, password, **extra_fields)
-    def create_superuser(self, username: str, email: str, password: Optional[str], **extra_fields: Any) -> _T:
+    def create_superuser(self, username: str, email: str, password:str, **extra_fields):
         return super().create_superuser(username, email, password, **extra_fields)
 
 class BaseUser(AbstractUser):
