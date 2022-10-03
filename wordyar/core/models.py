@@ -1,3 +1,5 @@
+from email.policy import default
+from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext as _
@@ -36,11 +38,13 @@ class BaseModel(models.Model):
     
 
 class MyUserManager(UserManager):
-    def create_user(self, username: str, email: Optional[str] = ..., password: Optional[str] = ..., **extra_fields: Any) -> _T:
+    def create_user(self, username: str, email: str, password: Optional[str] = ..., **extra_fields: Any) -> _T:
         return super().create_user(username, email, password, **extra_fields)
-    def create_superuser(self, username: str, email: Optional[str], password: Optional[str], **extra_fields: Any) -> _T:
+    def create_superuser(self, username: str, email: str, password: Optional[str], **extra_fields: Any) -> _T:
         return super().create_superuser(username, email, password, **extra_fields)
 
 class BaseUser(AbstractUser):
-    
+    phone = models.CharField(max_length=11, default=None,verbose_name=_("phone"))
+
+
     objects = MyUserManager()
