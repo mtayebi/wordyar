@@ -38,13 +38,13 @@ class BaseModel(models.Model):
     
 
 class MyUserManager(UserManager):
-    def create_user(self, username: str, email: str, password:str = ..., **extra_fields):
+    def create_user(self, username: str, email: str, password:str, **extra_fields):
         return super().create_user(username, email, password, **extra_fields)
     def create_superuser(self, username: str, email: str, password:str, **extra_fields):
         return super().create_superuser(username, email, password, **extra_fields)
 
 class BaseUser(AbstractUser):
-    phone = models.CharField(max_length=11, default=None,verbose_name=_("phone"))
+    phone = models.CharField(max_length=11, default=None, null=True,verbose_name=_("phone"))
 
 
     objects = MyUserManager()
