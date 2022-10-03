@@ -1,9 +1,7 @@
-from email.policy import default
-from re import M
-from tabnanny import verbose
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext as _
+from django.contrib.auth.models import AbstractUser, UserManager
 
 
 """
@@ -36,3 +34,13 @@ class BaseModel(models.Model):
         self.delete_time = timezone.now()
         self.save()
     
+
+class MyUserManager(UserManager):
+    def create_user(self, username: str, email: Optional[str] = ..., password: Optional[str] = ..., **extra_fields: Any) -> _T:
+        return super().create_user(username, email, password, **extra_fields)
+    def create_superuser(self, username: str, email: Optional[str], password: Optional[str], **extra_fields: Any) -> _T:
+        return super().create_superuser(username, email, password, **extra_fields)
+
+class BaseUser(AbstractUser):
+    
+    objects = MyUserManager()
