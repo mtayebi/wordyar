@@ -20,7 +20,7 @@ class BaseManager(models.Manager):
         return super().get_queryset()
 
 class BaseModel(models.Model):
-    create_time = models.DateTimeField(auto_now_time=True, verbose_name=_("creat_time"))
+    create_time = models.DateTimeField(auto_now_add=True, verbose_name=_("creat_time"))
     update_time = models.DateTimeField(auto_now=True, verbose_name=_("update_time"))
     delete_time = models.DateTimeField(blank=True, null=True, verbose_name=_("delete_time"))
     is_deleted = models.BooleanField(default=False, verbose_name=_("is_deleted"))
