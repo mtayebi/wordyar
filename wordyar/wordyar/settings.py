@@ -46,6 +46,8 @@ INSTALLED_APPS = [
 
     # my apps
     'core.apps.CoreConfig',
+    'accounts.apps.AccountsConfig',
+    'exams.apps.ExamsConfig',
 ]
 
 MIDDLEWARE = [
