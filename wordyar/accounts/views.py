@@ -4,8 +4,8 @@ from django.views import View
 from accounts.forms import AccountForm, LoginForm
 from core.models import BaseUser
 from django.contrib import messages
-from django.contrib.auth import login, authenticate
-
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # define accounts views containing registeration and uer profile
@@ -67,7 +67,7 @@ class Login(View):
         }
 
         # verify if informations user sent is true and then login her/him
-        if form.is_valid:
+        if form.is_valid():
             form = form.cleaned_data
 
             # use django authenticate method to authenticate user
@@ -85,3 +85,10 @@ class Login(View):
         # return form with it's errors is user was not loged in
         return render(request, self.template_name, context=context)
            
+class Logout(LoginRequiredMixin, View):
+
+    def get(self, request):
+        logout(request)
+        message= 'شما با موفقیت خارج شدید'
+        messages.success(request, message, 'info')
+        return redirect('core:home')
