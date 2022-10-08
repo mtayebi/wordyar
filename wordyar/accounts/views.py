@@ -46,15 +46,42 @@ class UserRegister(View):
         return render(request, self.template_name, {"form": form})
 
 class Login(View):
+    # define attributes that will use with post and get methods
     form_class = LoginForm
     template_name = 'accounts/login.html'
 
+    # define get method as user can get a form to fill for login
     def get(self, request):
         context= {
             'form':self.form_class,
         }
-        
+
         return render(request, self.template_name, context=context)
 
+
     def post(self, request):
-        ...
+
+        form = self.form_class(request.POST)
+        context = {
+            'form': self.form_class
+        }
+
+        # verify if informations user sent is true and then login her/him
+        if form.is_valid:
+            form = form.cleaned_data
+
+            # use django authenticate method to authenticate user
+            user = authenticate(request, username=form['username'], password=form['password'])
+
+            # if user is authenticated login user and show success message
+            if user is not None:
+                login(request, user)
+                message = 'ورود با موفقیت انجام شد'
+                messages.success(request, message, 'info')
+                return redirect('core:home')
+            error_message = 'نام کاربری یا کلمه عبور اشتباه است'
+            messages.error(request, error_message, 'warning')
+        
+        # return form with it's errors is user was not loged in
+        return render(request, self.template_name, context=context)
+           
