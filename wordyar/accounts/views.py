@@ -97,8 +97,10 @@ class Logout(LoginRequiredMixin, View):
 class Profile(LoginRequiredMixin ,View):
 
     def get(self, request):
+        template_name = 'accounts/profile.html'
+
         account = Account.objects.get(user=request.user)
         context = {
             'account': account
             }
-        return render(request, 'accounts/profile.html', context=context)
+        return render(request, self.template_name, context=context)
