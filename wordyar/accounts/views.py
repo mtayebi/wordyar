@@ -1,3 +1,4 @@
+import accounts
 from accounts.models import Account
 from django.shortcuts import redirect, render
 from django.views import View
@@ -92,3 +93,12 @@ class Logout(LoginRequiredMixin, View):
         message= 'شما با موفقیت خارج شدید'
         messages.success(request, message, 'info')
         return redirect('core:home')
+
+class Profile(LoginRequiredMixin ,View):
+
+    def get(self, request):
+        account = Account.objects.get(user=request.user)
+        context = {
+            'account': account
+            }
+        return render(request, 'accounts/profile.html', context=context)
