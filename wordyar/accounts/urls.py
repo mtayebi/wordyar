@@ -1,10 +1,11 @@
 from argparse import Namespace
 from unicodedata import name
 from django.urls import path
-from .views import UserRegister
+from . import views
 
 app_name = "accounts"
 
 urlpatterns = [
-    path("register/", UserRegister.as_view(), name="register"),
+    path("register/", views.UserRegister.as_view(), name="register"),
+    path("login/", views.Login.as_view(), name="login"),
 ]

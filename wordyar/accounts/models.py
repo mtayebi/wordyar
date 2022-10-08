@@ -10,7 +10,7 @@ mychoices = [("0","starter"), ("1", "intermediate"), ("2", "advanced"), ("3", "l
 # Create account model according to ERD
 
 class Account(BaseModel):
-    User = models.OneToOneField(BaseUser, models.CASCADE)
+    user = models.OneToOneField(BaseUser, models.CASCADE)
     level = models.CharField(choices=mychoices, max_length=1, null=True, default=None)
     paid_user = models.BooleanField(default=False)
 
