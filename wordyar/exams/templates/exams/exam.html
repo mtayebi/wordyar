@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="" method="post" class="col-md-5">
+        {% csrf_token %}
+        {% for question in questions %}
+        <h3>{{ question.question }}</h3><br>
+        <input type="radio"/>{{ question.answer }}<br>
+        {% endfor %}
+        <input type="submit" value="سوال بعد">
+    </form>
+
+{% endblock %}

@@ -16,6 +16,7 @@ class Exam(BaseModel):
     false_answer = models.IntegerField(default=0)
     true_answer = models.IntegerField(default=0)
     number = models.IntegerField(default=10)
+    question_passed = models.IntegerField(default=0)  # show the number of questions passed by user
 
 
     def score(self):

@@ -95,9 +95,9 @@ class Logout(LoginRequiredMixin, View):
         return redirect('core:home')
 
 class Profile(LoginRequiredMixin ,View):
+    template_name = 'accounts/profile.html'
 
     def get(self, request):
-        template_name = 'accounts/profile.html'
 
         account = Account.objects.get(user=request.user)
         context = {
