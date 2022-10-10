@@ -67,3 +67,5 @@ class UserExam(LoginRequiredMixin, View):
             print(request.POST)
             return redirect('exams:exam', exam.pk)
         return HttpResponse('finished')
+
+   
