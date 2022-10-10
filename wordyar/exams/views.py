@@ -52,7 +52,6 @@ class UserExam(LoginRequiredMixin, View):
         context = {
             'questions':questions
         }
-        # check_exam(exam)
         return render(request, self.template_name, context=context)
 
 
