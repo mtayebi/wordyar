@@ -104,5 +104,3 @@ class Profile(LoginRequiredMixin ,View):
             'account': account
             }
         return render(request, self.template_name, context=context)
-
-    
