@@ -3,9 +3,9 @@
 {% block content %}
     <form action="" method="post" class="col-md-5">
         {% csrf_token %}
-        {% for question in questions %}
-        <h3>{{ question.question }}</h3><br>
-        <input type="radio"/>{{ question.answer }}<br>
+        <input type="hidden" placeholder="{{ question }}" nam="question">{{ question }}</h3><br>
+        {% for answer in answers %}
+        <input type="radio" name="{{forloop.counter}}">{{ answer }}<br>
         {% endfor %}
         <input type="submit" value="سوال بعد">
     </form>
