@@ -45,12 +45,16 @@ class UserExamInterface(LoginRequiredMixin, View):
 class UserExam(LoginRequiredMixin, View):
     
     template_name = 'exams/exam.html'
+    random_choices = [0, 1 ,2, 3]
 
     def get(self, request, pk):
         questions = list(Question.objects.all())
         questions = random.sample(questions, 4)
+        random_choice = random.sample(self.random_choices, 4)
+
         context = {
-            'questions':questions
+            'question':questions[0].question,
+            'answers': [question.answer for question in questions]
         }
         return render(request, self.template_name, context=context)
 
@@ -64,6 +68,7 @@ class UserExam(LoginRequiredMixin, View):
         if exam.question_passed < exam.number:
             exam.question_passed += 1
             exam.save()
-            print(request.POST)
+            print("="*100)
+            print(request.POST['1'], request.POST, exam.question_passed, exam.number)
             return redirect('exams:exam', exam.pk)
         return HttpResponse('finished')
