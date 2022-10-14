@@ -1,7 +1,10 @@
 
+import imp
+import json
 import random
 from django.shortcuts import redirect, render, HttpResponse
 from django.views import View
+from django.http import JsonResponse
 from core.models import BaseUser
 from .models import Exam, Question
 from .forms import ExamForm
@@ -45,12 +48,10 @@ class UserExamInterface(LoginRequiredMixin, View):
 class UserExam(LoginRequiredMixin, View):
     
     template_name = 'exams/exam.html'
-    random_choices = [0, 1 ,2, 3]
 
     def get(self, request, pk):
         questions = list(Question.objects.all())
         questions = random.sample(questions, 4)
-        random_choice = random.sample(self.random_choices, 4)
 
         context = {
             'question':questions[0].question,
@@ -69,6 +70,20 @@ class UserExam(LoginRequiredMixin, View):
             exam.question_passed += 1
             exam.save()
             print("="*100)
-            print(request.POST['1'], request.POST, exam.question_passed, exam.number)
+            print(request.POST, exam.question_passed, exam.number)
             return redirect('exams:exam', exam.pk)
         return HttpResponse('finished')
+
+
+class AjaxResponse(LoginRequiredMixin, View):
+
+    def get(self, request, *args, **kwargs):
+        questions = list(Question.objects.all())
+        questions = random.sample(questions, 4)
+        context = {
+            'question':questions[0].question,
+            'answers': [question.answer for question in random.sample(questions, 4)]
+        }
+        print(json.loads(request.GET['data'])['1'])
+
+        return JsonResponse(context)

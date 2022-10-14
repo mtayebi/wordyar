@@ -3,11 +3,19 @@
 {% block content %}
     <form action="" method="post" class="col-md-5">
         {% csrf_token %}
-        <input type="hidden" placeholder="{{ question }}" nam="question">{{ question }}</h3><br>
+        <h3 type="hidden" placeholder="{{ question }}" id="question">{{ question }}</h3><br>
         {% for answer in answers %}
-        <input type="radio" name="{{forloop.counter}}">{{ answer }}<br>
+        <input type="radio" name="answer-{{forloop.counter}}" id="answer-{{forloop.counter}}">
+            <div id="answer{{forloop.counter}}">
+                {{ answer }}
+            </div>
         {% endfor %}
         <input type="submit" value="سوال بعد">
     </form>
+    <button onclick="loadQuestion()" value="سوال بعد">سوال بعد</button>
 
+{% endblock %}
+
+{% block script %}
+<script src="/static/js/my-js.js"></script>
 {% endblock %}
