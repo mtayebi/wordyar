@@ -7,6 +7,4 @@ class home(View):
 
     def get(self, request):
         return render(request, "core/home.html")
-
-    
     
