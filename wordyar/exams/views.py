@@ -84,7 +84,7 @@ class AjaxResponse(LoginRequiredMixin, View):
             'question':questions[0].question,
             'answers': [question.answer for question in random.sample(questions, 4)]
         }
-        print(json.loads(request.GET['data'])['question'], json.loads(request.GET['data'])['answer'])
+        # print(json.loads(request.GET['data'])['question'], json.loads(request.GET['data'])['answer'])
 
         user = request.user
         account = Account.objects.get(user=user)
@@ -93,6 +93,22 @@ class AjaxResponse(LoginRequiredMixin, View):
         if exam.question_passed < exam.number:
             exam.question_passed += 1
             exam.save()
+            qst = Question.objects.get(question = json.loads(request.GET['data'])['question'])
             
+            print(qst.answer, '>>>>>>>>>>', json.loads(request.GET['data'])['answer'])
+            print(qst.answer == json.loads(request.GET['data'])['answer'])
+            print(len(qst.answer), len(json.loads(request.GET['data'])['answer']))
 
-        return JsonResponse(context)
+            if qst.answer == json.loads(request.GET['data'])['answer']:
+                exam.true_answer += 1
+                exam.save()
+                print('='*100)
+                print(exam.true_answer)
+            
+            elif json.loads(request.GET['data'])['answer']:
+                exam.false_answer += 1
+                exam.save()
+
+            return JsonResponse(context)
+
+        return HttpResponse('finished')
