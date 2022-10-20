@@ -85,6 +85,15 @@ class AjaxResponse(LoginRequiredMixin, View):
             'question':questions[0].question,
             'answers': [question.answer for question in random.sample(questions, 4)]
         }
-        print(json.loads(request.GET['data'])['1'])
+        print(json.loads(request.GET['data'])['question'], json.loads(request.GET['data'])['answer'])
+
+        user = request.user
+        account = Account.objects.get(user=user)
+        exam = Exam.objects.filter(account=account).last()
+
+        if exam.question_passed < exam.number:
+            exam.question_passed += 1
+            exam.save()
+            
 
         return JsonResponse(context)
