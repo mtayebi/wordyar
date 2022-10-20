@@ -1,4 +1,12 @@
+var answer = ""
+
 function loadQuestion(){
+    
+    document.getElementById("answer-1").checked = false
+    document.getElementById("answer-2").checked = false
+    document.getElementById("answer-3").checked = false
+    document.getElementById("answer-4").checked = false
+
     let request = new XMLHttpRequest()
     request.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
@@ -16,13 +24,18 @@ function loadQuestion(){
         }
 
     }
-    const answers = {}
-    for (let i=1; i<5; i++){
-       answers[i] = document.getElementById("answer"+i).innerHTML
 
-    }
-    var data = JSON.stringify(answers)
-    url = "http://127.0.0.1:8000/exams/api?data="+data
+    const data = {}
+    data['question'] = document.getElementById("question").innerHTML
+    data['answer'] = answer
+    var response_data = JSON.stringify(data)
+    url = "http://127.0.0.1:8000/exams/api?data="+response_data
+
     request.open("GET", url)
     request.send()
+}
+
+function saveAnswer(ans){
+    answer = document.getElementById(ans).innerHTML
+    console.log(answer)
 }
