@@ -34,8 +34,6 @@ class UserExamInterface(LoginRequiredMixin, View):
         if form.is_valid():
             form = form.cleaned_data
             user = request.user
-            
-            
             account = Account.objects.get(user=user)
 
             # we craete an exam for user --- level of exam ignored we will handle this later in modification
