@@ -7,7 +7,6 @@ function loadQuestion(){
     document.getElementById("answer-3").checked = false
     document.getElementById("answer-4").checked = false
 
-    clearAnswer()
 
     let request = new XMLHttpRequest()
     request.onreadystatechange = function(){
@@ -16,11 +15,6 @@ function loadQuestion(){
             // if number of questions finished hide next button
             if (!(JSON.parse(this.response)['continue'])){
                 document.getElementById("next").hidden = true 
-                document.getElementById("question").innerHTML = "پایان آزمون"
-                document.getElementById("answer-1").innerHTML = ""
-                document.getElementById("answer-2").innerHTML = ""
-                document.getElementById("answer3").innerHTML = ""
-                document.getElementById("answer4").innerHTML = ""
             }
 
 
@@ -53,10 +47,4 @@ function loadQuestion(){
 function saveAnswer(ans){
     answer = document.getElementById(ans).innerHTML
     console.log(answer)
-}
-
-
-function clearAnswer(){
-    answer = ""
-    console.log("cleared")
 }
