@@ -39,7 +39,7 @@ class UserExamInterface(LoginRequiredMixin, View):
 
             # we craete an exam for user --- level of exam ignored we will handle this later in modification
             exam = Exam.objects.create(account=account, number=form.get('number', 10))
-            return redirect('exams:exam', exam.pk)
+            return redirect('exams:exam')
 
 
 
@@ -47,7 +47,7 @@ class UserExam(LoginRequiredMixin, View):
     
     template_name = 'exams/exam.html'
 
-    def get(self, request, pk):
+    def get(self, request):
         questions = list(Question.objects.all())
         questions = random.sample(questions, 4)
 
