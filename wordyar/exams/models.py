@@ -20,7 +20,7 @@ class Exam(BaseModel):
 
 
     def score(self):
-        if self.false_answer != 0 and self.true_answer != 0:
+        if self.false_answer != 0 or self.true_answer != 0:
             result = (((self.true_answer*3)-self.false_answer)/((self.number)*3))*100
             return result
         return 0
