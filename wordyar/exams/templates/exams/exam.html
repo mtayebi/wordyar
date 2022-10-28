@@ -1,30 +1,51 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form action="" method="post" class="col-md-5">
-        {% csrf_token %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm col-lg-8" style="margin-right: 20%;">
+     <div class="card ">
 
-        <h3 type="hidden" placeholder="{{ question }}" id="question">{{ question }}</h3><br>
-        {% for answer in answers %}
+        <div class="card-body" style="background: #b8ced9;">
+        
+            <form action="" method="post" class="col-md-5" style="margin-right: 30%; text-align: -moz-center;">
+                {% csrf_token %}
 
-        <div class="form-check">
+                <h3 type="hidden" placeholder="{{ question }}" id="question">{{ question }}</h3><br>
+                {% for answer in answers %}
 
-        <input type="radio" onclick='saveAnswer("answer{{forloop.counter}}")'
-         name="answer" id="answer-{{forloop.counter}}" class="form-check-input">
+                <div class="form-check">
 
-            <label>
-                &ensp;&ensp;<strong id="answer{{forloop.counter}}">
-                {{ answer }}   
-                 </strong>
+                <input type="radio" onclick='saveAnswer("answer{{forloop.counter}}")'
+                name="answer" id="answer-{{forloop.counter}}" class="form-check-input">
 
-            </label>
+                    <label>
+                        &ensp;&ensp;<strong id="answer{{forloop.counter}}">
+                        {{ answer }}   
+                        </strong>
 
-        </div>
-        {% endfor %}
-        <input type="submit" value="سوال بعد">
-    </form>
-    <button onclick="loadQuestion()" value="سوال بعد">سوال بعد</button>
+                    </label>
 
+                </div>
+                {% endfor %}
+
+            </div>
+
+            <div class="card-footer" style="background: #2d2b39;">
+                <input class="btn btn-outline-success"
+                style="margin-left: 10%;" type="submit" value="پایان آزمون">
+            </form>
+                <button class="btn btn-outline-primary"
+                style="margin-left: 30%;" id="next" onclick="loadQuestion()" 
+                value="سوال بعد">سوال بعد
+                </button>
+            
+            </div>
+
+     </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 {% block script %}

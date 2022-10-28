@@ -1,5 +1,3 @@
-
-import imp
 import json
 import random
 from django.shortcuts import redirect, render, HttpResponse
@@ -66,13 +64,12 @@ class UserExam(LoginRequiredMixin, View):
         account = Account.objects.get(user=user)
         exam = Exam.objects.filter(account=account).last()
 
-        if exam.question_passed < exam.number:
-            exam.question_passed += 1
-            exam.save()
-            print("="*100)
-            print(request.POST, exam.question_passed, exam.number)
-            return redirect('exams:exam', exam.pk)
-        return HttpResponse('finished')
+        context={
+            'questions_number' : exam.number,
+            'score' : exam.score,
+        }
+
+        return HttpResponse(f'finished\nscore:{exam.score()}\nnumber of question:{exam.number}')
 
 
 class AjaxResponse(LoginRequiredMixin, View):
@@ -82,7 +79,8 @@ class AjaxResponse(LoginRequiredMixin, View):
         questions = random.sample(questions, 4)
         context = {
             'question':questions[0].question,
-            'answers': [question.answer for question in random.sample(questions, 4)]
+            'answers': [question.answer for question in random.sample(questions, 4)],
+            'continue': True,
         }
         # print(json.loads(request.GET['data'])['question'], json.loads(request.GET['data'])['answer'])
 
@@ -93,22 +91,21 @@ class AjaxResponse(LoginRequiredMixin, View):
         if exam.question_passed < exam.number:
             exam.question_passed += 1
             exam.save()
-            qst = Question.objects.get(question = json.loads(request.GET['data'])['question'])
-            
-            print(qst.answer, '>>>>>>>>>>', json.loads(request.GET['data'])['answer'])
-            print(qst.answer == json.loads(request.GET['data'])['answer'])
-            print(len(qst.answer), len(json.loads(request.GET['data'])['answer']))
 
-            if qst.answer == json.loads(request.GET['data'])['answer']:
+            qst = Question.objects.get(question = json.loads(request.GET['data'])['question'])
+
+            if qst.answer in json.loads(request.GET['data'])['answer']:
                 exam.true_answer += 1
                 exam.save()
-                print('='*100)
-                print(exam.true_answer)
             
             elif json.loads(request.GET['data'])['answer']:
                 exam.false_answer += 1
                 exam.save()
+            
+            if exam.question_passed == exam.number:
+                context['continue'] = False
 
             return JsonResponse(context)
 
-        return HttpResponse('finished')
+        context = {'continue' : False}
+        return JsonResponse(context)
