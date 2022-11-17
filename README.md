@@ -30,3 +30,20 @@
 ## how to use?
 
 - clone the project as below:
+```
+git clone https://github.com/mtayebi/wordyar.git
+```
+- go to wordyar directory
+```
+cd wordyar
+```
+- run cmmand below
+```
+python3 manage.py runserver
+```
+
+- > **_NOTE:_** you should have installed django in your running system.
+- > **_NOTE:_** database of questions need to be pereted you can create one by
+  ``` python3 mange.py createsuperuser ``` or you can connect your own by changing database settings
+  
+
