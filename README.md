@@ -12,3 +12,11 @@
 -  false answers will cause decreasing the final score so it is rational to dont answer an question
 -  i try to simulate real world exams but of course any program has some shortages, im open to recive messages from you or you can improve that yourself it is opensource but dont forget to give star
 -  real isue that i can point to is frontend designing i know this, im not really good in front it is not my main field. 
+
+## how future can be for this project
+
+- **improve frontend**
+- fix probably bugs
+- add new features
+- and use costomer ideas 
+
