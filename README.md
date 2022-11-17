@@ -20,3 +20,8 @@
 - add new features
 - and use costomer ideas 
 
+## technical view
+
+- > the project contains three main apps (core, exams, accounts), this help to use this project as a **micro service** project.
+- > exam pages use json and ajax to comunicate with view part this speed up loading the pages and make better feel for user. and bring **RESTAPI** architecture in our service
+- > 
