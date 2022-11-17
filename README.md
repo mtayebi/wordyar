@@ -27,3 +27,6 @@
 - > thanks to ***Django authentication system*** featues not registered users can not see exams and participate in them. this help us contorol users authentication  
 - > the ***ERD*** of project tries to be written flexible, so it is open to changing Application in various kind of exams.
 
+## how to use?
+
+- clone the project as below:
