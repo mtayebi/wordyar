@@ -18,17 +18,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 # posgresql DB information
-mydatabase = "wnfvwcxh"
-mydatabaseuser = "wnfvwcxh"
-mypassword = "23mqYnvcoOVphIwbs07YFoXa73I-U6Vw"
-HOST = "lucky.db.elephantsql.com"
+mydatabase = ""
+mydatabaseuser = ""
+mypassword = ""
+HOST = ""
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=__17gyjz9f5v4xx5$8=-%peuxtbdzizisiwnub+ghz=@!)3c='
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
