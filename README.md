@@ -22,6 +22,8 @@
 
 ## technical view
 
-- > the project contains three main apps (core, exams, accounts), this help to use this project as a **micro service** project.
-- > exam pages use json and ajax to comunicate with view part this speed up loading the pages and make better feel for user. and bring **RESTAPI** architecture in our service
-- > 
+- > the project contains three main apps (core, exams, accounts), this help to use this project as a ***micro service*** project.
+- > exam pages use ***json*** and ***ajax*** to comunicate with view part this speed up loading the pages and make better feel for user. and bring ***RESTAPI*** architecture in our service
+- > thanks to ***Django authentication system*** featues not registered users can not see exams and participate in them. this help us contorol users authentication  
+- > the ***ERD*** of project tries to be written flexible, so it is open to changing Application in various kind of exams.
+
