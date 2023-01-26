@@ -2,7 +2,7 @@
 
 ## wordyar is a simple web application for **online test exams**
 
-### this project was originally writen to help in word meaning learing beacause of this its name is wordyar 
+### this project was originally writen to help in Learning vocabulary beacause of this, it's name is wordyar 
 
 ## features
 
